@@ -1,0 +1,35 @@
+# Data directory (runtime-generated, not committed)
+data/
+
+# .NET build artifacts
+**/bin/
+**/obj/
+*.user
+
+# VS / Rider
+.vs/
+.idea/
+*.suo
+*.rsuser
+
+# Node
+web/node_modules/
+web/dist/
+
+# Build output copied to wwwroot
+src/AgentHost.Api/wwwroot/
+
+# Environment / secrets
+.env
+*.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+artifacts/
+
+# planning-with-files skill scratchpad (root-level by skill convention)
+/task_plan.md
+/findings.md
+/progress.md
+/.claude/scheduled_tasks.lock

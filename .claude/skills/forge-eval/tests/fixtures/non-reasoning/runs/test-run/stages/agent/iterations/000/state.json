@@ -1,0 +1,36 @@
+{
+    "iter":  0,
+    "nudged":  false,
+    "messages":  [
+                     {
+                         "role":  "system",
+                         "content":  "You are a test agent."
+                     },
+                     {
+                         "role":  "user",
+                         "content":  "Do the thing."
+                     },
+                     {
+                         "role":  "assistant",
+                         "content":  "Plain assistant turn 0.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "nr-0",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "read_file",
+                                                                 "arguments":  "{\"path\":\"src/Turn0.cs\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "nr-0",
+                         "content":  "class Turn0 {}"
+                     }
+                 ],
+    "ledger":  [
+
+               ]
+}

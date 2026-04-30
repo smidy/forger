@@ -1,0 +1,492 @@
+{
+    "iter":  24,
+    "nudged":  false,
+    "messages":  [
+                     {
+                         "role":  "system",
+                         "content":  "You are a test agent."
+                     },
+                     {
+                         "role":  "user",
+                         "content":  "Do the thing."
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 0.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-0",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file0.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-0",
+                         "content":  "unique content for file 0 with specific data abc0 def0 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 1.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-1",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file1.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-1",
+                         "content":  "unique content for file 1 with specific data abc1 def1 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 2.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-2",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file2.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-2",
+                         "content":  "unique content for file 2 with specific data abc2 def2 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 3.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-3",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file3.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-3",
+                         "content":  "unique content for file 3 with specific data abc3 def3 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 4.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-4",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file4.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-4",
+                         "content":  "unique content for file 4 with specific data abc4 def4 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 5.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-5",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file5.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-5",
+                         "content":  "unique content for file 5 with specific data abc5 def5 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 6.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-6",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file6.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-6",
+                         "content":  "unique content for file 6 with specific data abc6 def6 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 7.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-7",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file7.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-7",
+                         "content":  "unique content for file 7 with specific data abc7 def7 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 8.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-8",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file8.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-8",
+                         "content":  "unique content for file 8 with specific data abc8 def8 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 9.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-9",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file9.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-9",
+                         "content":  "unique content for file 9 with specific data abc9 def9 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 10.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-10",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file10.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-10",
+                         "content":  "unique content for file 10 with specific data abc10 def10 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 11.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-11",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file11.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-11",
+                         "content":  "unique content for file 11 with specific data abc11 def11 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 12.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-12",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file12.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-12",
+                         "content":  "unique content for file 12 with specific data abc12 def12 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 13.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-13",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file13.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-13",
+                         "content":  "unique content for file 13 with specific data abc13 def13 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 14.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-14",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file14.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-14",
+                         "content":  "unique content for file 14 with specific data abc14 def14 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 15.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-15",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file15.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-15",
+                         "content":  "unique content for file 15 with specific data abc15 def15 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 16.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-16",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file16.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-16",
+                         "content":  "unique content for file 16 with specific data abc16 def16 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 17.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-17",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file17.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-17",
+                         "content":  "unique content for file 17 with specific data abc17 def17 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 18.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-18",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file18.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-18",
+                         "content":  "unique content for file 18 with specific data abc18 def18 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 19.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-19",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file19.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-19",
+                         "content":  "unique content for file 19 with specific data abc19 def19 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 20.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-20",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file20.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-20",
+                         "content":  "unique content for file 20 with specific data abc20 def20 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 21.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-21",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file21.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-21",
+                         "content":  "unique content for file 21 with specific data abc21 def21 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 22.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-22",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file22.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-22",
+                         "content":  "unique content for file 22 with specific data abc22 def22 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 23.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-23",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file23.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-23",
+                         "content":  "unique content for file 23 with specific data abc23 def23 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 24.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-24",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file24.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-24",
+                         "content":  "unique content for file 24 with specific data abc24 def24 ghi"
+                     }
+                 ],
+    "ledger":  [
+
+               ]
+}

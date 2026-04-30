@@ -1,0 +1,36 @@
+{
+    "iter":  0,
+    "nudged":  false,
+    "messages":  [
+                     {
+                         "role":  "system",
+                         "content":  "You are a test agent."
+                     },
+                     {
+                         "role":  "user",
+                         "content":  "Do the thing."
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 0.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-0",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file0.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-0",
+                         "content":  "unique content for file 0 with specific data abc0 def0 ghi"
+                     }
+                 ],
+    "ledger":  [
+
+               ]
+}

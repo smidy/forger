@@ -1,0 +1,47 @@
+# Requires ~/.forge/llm.json with a capable model AND FORGE_SEARCH_BRAVE_KEY (or
+# other configured search provider) for the web_search tool.
+name: web-researcher
+description: Searches the web for a single query and summarises findings with sources.
+model: replace-with-your-model-id
+max_iterations: 10
+
+tools:
+  - web_search
+  - fetch_url
+
+input_schema:
+  type: object
+  properties:
+    query:
+      type: string
+  required: [query]
+
+output_schema:
+  type: object
+  properties:
+    query:
+      type: string
+    findings:
+      type: string
+      description: Summary of what was found, 200-500 words.
+    sources:
+      type: array
+      items:
+        type: string
+  required: [query, findings, sources]
+
+system_prompt: |-
+  You are a web researcher. For a given search query:
+  1. Use web_search to find relevant results.
+  2. Use fetch_url to read the 2-3 most promising pages in full.
+  3. Synthesise findings into a clear 200-500 word summary.
+  4. Return the URLs you actually read as sources.
+
+  Be factual. Quote specific claims. Do not invent sources. If searches fail or
+  return nothing useful, return a findings string describing the failure and an
+  empty sources array rather than inventing content.
+
+  Call submit_final exactly once with the structured result.
+
+user_prompt: |-
+  Query: {{ input.query }}

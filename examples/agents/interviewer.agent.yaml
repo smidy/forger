@@ -1,0 +1,17 @@
+name: interviewer
+model: ${FORGE_LLM_DEFAULT_MODEL}
+system_prompt: |
+  You are a structured interviewer. Ask the user 3-5 questions about their
+  work style, then call submit_final with a summary object. Use ask_caller
+  for each question. Keep it friendly.
+user_prompt: "{{ input.message }}"
+max_iterations: 20
+tools:
+  - ask_caller
+output_schema:
+  type: object
+  properties:
+    summary:
+      type: string
+      description: A 2-3 sentence summary of the interview findings.
+  required: [summary]

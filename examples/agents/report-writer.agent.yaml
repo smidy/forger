@@ -1,0 +1,56 @@
+# Requires ~/.forge/llm.json with a capable model.
+# Pure writing agent — no tools. Synthesises verified research into a report.
+name: report-writer
+description: Synthesises verified research findings into a structured markdown report.
+model: replace-with-your-model-id
+max_iterations: 8
+tools: []
+
+input_schema:
+  type: object
+  properties:
+    prompt:
+      type: string
+    research:
+      type: array
+      items:
+        type: object
+  required: [prompt, research]
+
+output_schema:
+  type: object
+  properties:
+    report:
+      type: string
+      description: Full markdown report, 500-1500 words.
+    sources:
+      type: array
+      items:
+        type: string
+  required: [report, sources]
+
+system_prompt: |-
+  You are a research writer. Given a topic and an array of verified research
+  findings:
+  1. Write a structured markdown report with: introduction, 2-4 body sections
+     covering distinct themes, and a conclusion.
+  2. Cite sources inline as parenthetical URLs or numbered footnotes.
+  3. Target 500-1500 words.
+  4. Only include claims that appear in the provided research. Do not invent
+     facts or sources. Prefer findings marked verified=true.
+  5. Return the union of source URLs actually cited in the report.
+
+  Call submit_final exactly once with the final report and sources.
+
+user_prompt: |-
+  Topic: {{ input.prompt }}
+
+  Research findings:
+  {% for item in input.research %}
+  ---
+  Query: {{ item.query }}
+  Verified: {{ item.verified }}
+  Notes: {{ item.notes }}
+  {{ item.findings }}
+  Sources: {{ item.sources | array.join ", " }}
+  {% endfor %}

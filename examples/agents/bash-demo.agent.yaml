@@ -1,0 +1,54 @@
+# Demonstrates the opt-in `bash` tool. See `docs/Domain/tools.md` for the
+# `bash:` block schema.
+#
+# Prerequisites:
+#   1. Docker >= 25.0 reachable (verify via `forge doctor`).
+#   2. Build the reference image and pin its digest — see
+#      `examples/bash/README.md`. Substitute the digest in `bash.image` below.
+#
+# Invoke:
+#   forge agent bash-demo --input '{"name":"world"}'
+name: bash-demo
+model: replace-with-your-model-id
+max_iterations: 6
+
+tools: [bash]
+
+bash:
+  # PIN THE DIGEST: build examples/bash/Dockerfile, then paste the sha256 here.
+  image: sha256:REPLACE_WITH_REAL_DIGEST
+  timeout_sec: 30
+  memory: 256m
+  cpus: 0.5
+  pids_limit: 64
+  # No `mounts:` block — the per-run workspace is mounted at /run by default.
+  # The agent writes its scratch output there. Add `mounts:` only when an
+  # agent needs host paths beyond the run workspace.
+  env_allow: [LANG]
+  env:
+    LANG: C.UTF-8
+
+system_prompt: |-
+  You have access to a sandboxed bash container. The per-run workspace is
+  mounted read-write at /run — treat it as your scratch directory.
+
+  When asked to greet someone, write a one-line greeting to
+  /run/greeting.txt and then call submit_final with the exit code of the
+  bash command you ran.
+user_prompt: "Greet {{ input.name }}."
+
+input_schema:
+  type: object
+  properties:
+    name:
+      type: string
+  required:
+    - name
+
+output_schema:
+  type: object
+  properties:
+    exit_code:
+      type: integer
+  required:
+    - exit_code

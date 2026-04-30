@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p ~/.claude/skills/docs-maintainer/assets ~/.claude/skills/docs-maintainer/scripts ~/.claude/skills/docs-maintainer/references)",
+      "Read(//c/Users/StephenSmyth/.claude/skills/**)",
+      "Bash(mv C:/Repos/forge/.claude/skills/forge-dogfood C:/Repos/forge/.claude/skills/forge-eval)",
+      "Bash(mkdir -p C:/Repos/forge/.claude/skills/forge-eval/scripts)",
+      "PowerShell($errors = $null; [System.Management.Automation.Language.Parser]::ParseFile\\('C:\\\\Repos\\\\forge\\\\.claude\\\\skills\\\\forge-eval\\\\scripts\\\\analyse-run.ps1', [ref]$null, [ref]$errors\\) | Out-Null; if \\($errors.Count -eq 0\\) { 'OK' } else { $errors | Format-Table -AutoSize })",
+      "PowerShell(& \"$env:TEMP\\\\test-param.ps1\" -RunId 'abc-123')",
+      "PowerShell(& \"$env:TEMP\\\\test-param2.ps1\" -RunId 'abc-123')",
+      "PowerShell(& 'C:\\\\Repos\\\\forge\\\\.claude\\\\skills\\\\forge-eval\\\\scripts\\\\analyse-run.ps1' -RunId 'forge-dev-20260421-131323-2679bdc0' 2>&1)",
+      "PowerShell(& \"$env:TEMP\\\\analyse-run-copy.ps1\" -RunId 'forge-dev-20260421-131323-2679bdc0' 2>&1 | Select-Object -First 5)",
+      "Bash(cp C:/Repos/forge/.claude/skills/forge-eval/scripts/analyse-run.ps1 C:/Users/StephenSmyth/AppData/Local/Temp/a1.ps1)",
+      "Bash(head -30 C:/Users/StephenSmyth/AppData/Local/Temp/a1.ps1)",
+      "Bash(echo 'Write-Host \"RunId=$RunId\"')",
+      "Read(//c/Users/StephenSmyth/AppData/Local/Temp/**)",
+      "PowerShell(& \"$env:TEMP\\\\a2.ps1\" -RunId 'test-123' 2>&1 | Select-Object -First 5)",
+      "PowerShell($errors = $null; [System.Management.Automation.Language.Parser]::ParseFile\\('C:\\\\Repos\\\\forge\\\\.claude\\\\skills\\\\forge-eval\\\\scripts\\\\analyse-run.ps1', [ref]$null, [ref]$errors\\) | Out-Null; if \\($errors\\) { $errors | Format-List Message,Extent } else { 'parse OK' }; Get-Help 'C:\\\\Repos\\\\forge\\\\.claude\\\\skills\\\\forge-eval\\\\scripts\\\\analyse-run.ps1' | Select-Object Name, Syntax)",
+      "PowerShell(& \"$env:TEMP\\\\a_top.ps1\" -RunId 'xxx' 2>&1 | Select-Object -First 5)",
+      "PowerShell(& \"$env:TEMP\\\\a_20.ps1\" -RunId 'xxx' 2>&1 | Select-Object -First 3)",
+      "PowerShell(& \"$env:TEMP\\\\a_22.ps1\" -RunId 'xxx' 2>&1 | Select-Object -First 3)",
+      "PowerShell(& \"$env:TEMP\\\\a_25.ps1\" -RunId 'xxx' 2>&1 | Select-Object -First 3)",
+      "PowerShell(& \"$env:TEMP\\\\a_27.ps1\" -RunId 'xxx' 2>&1 | Select-Object -First 5)",
+      "PowerShell(& 'C:\\\\Repos\\\\forge\\\\.claude\\\\skills\\\\forge-eval\\\\scripts\\\\analyse-run.ps1' -RunId 'forge-dev-20260421-151107-17b4d3d7' 2>&1)",
+      "Bash(mkdir -p ~/.claude/MEMORY/WORK/20260421-193650_agent-reasoning)",
+      "Read(//c/Users/StephenSmyth/.claude/MEMORY/WORK/**)",
+      "PowerShell(.\\\\.claude\\\\skills\\\\forge-eval\\\\scripts\\\\analyse-run.ps1 forge-dev-20260422-114605-debb4d12 2>&1)",
+      "Bash(grep -E --line-buffered \"submit_final|AgentException|Exception|ContextWindow|status=| 5[0-9][0-9]$| 4[0-9][0-9]$\")",
+      "PowerShell(Stop-Process -Id 7952 -Force)",
+      "PowerShell($RUN='forge-dev-bash-20260423-174450-b232b741'; $TRACE=\"$env:USERPROFILE/.forge/runs/$RUN/trace.jsonl\"; $lines = Get-Content $TRACE -First 30; $lines | ForEach-Object { try { $e = $_ | ConvertFrom-Json; if \\($e.kind -eq 'tool_call'\\) { $e | ConvertTo-Json -Depth 3 -Compress; '---' } elseif \\($e.kind -eq 'llm_call'\\) { \"LLM: prompt=$\\($e.promptTokens\\) compl=$\\($e.completionTokens\\) dur=$\\($e.durationMs\\)\"; '---' } } catch {} })",
+      "PowerShell(& \"C:/Repos/forge/.claude/worktrees/peaceful-hofstadter-5fe89b/.claude/skills/forge-eval/scripts/analyse-reasoning.ps1\" -RunId forge-dev-bash-20260423-174450-b232b741 -RedactAbsolutePaths 2>&1)",
+      "PowerShell($RUN='forge-dev-bash-20260423-174450-b232b741'; $TRACE=\"$env:USERPROFILE/.forge/runs/$RUN/trace.jsonl\"; $ev = Get-Content $TRACE | ForEach-Object { try { $_ | ConvertFrom-Json } catch {} } | Where-Object { $_.kind -eq 'tool_call' -and $_.toolName -eq 'bash' }; Write-Host \"bash calls: $\\($ev.Count\\)\"; $u = $ev | Group-Object argsHash; Write-Host \"unique argsHash: $\\($u.Count\\)\"; Write-Host \"max repeat: $\\(\\($u | Measure-Object -Property Count -Max\\).Maximum\\)\"; $rep = $u | Where-Object Count -ge 2; Write-Host \"hashes with >=2 calls: $\\($rep.Count\\)\"; Write-Host ''; Write-Host 'Top 5 most-repeated:'; $rep | Sort-Object Count -Descending | Select-Object -First 5 | ForEach-Object { \"$\\($_.Name\\): x$\\($_.Count\\)\" })",
+      "PowerShell(& 'C:\\\\Repos\\\\forge\\\\.claude\\\\worktrees\\\\peaceful-hofstadter-5fe89b\\\\.claude\\\\skills\\\\forge-eval\\\\scripts\\\\analyse-reasoning.ps1' -RunId forge-dev-bash-20260423-174450-b232b741 2>&1)",
+      "PowerShell(.claude/skills/forge-eval/scripts/analyse-run.ps1 -RunId forge-dev-20260424-093543-2b28a712 2>&1)",
+      "PowerShell(.claude/skills/forge-eval/scripts/analyse-reasoning.ps1 -RunId forge-dev-20260424-093543-2b28a712 -SampleStrategy quick -OutFormat text 2>&1)"
+    ]
+  }
+}

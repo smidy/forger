@@ -1,0 +1,55 @@
+{
+    "iter":  1,
+    "nudged":  false,
+    "messages":  [
+                     {
+                         "role":  "system",
+                         "content":  "You are a test agent."
+                     },
+                     {
+                         "role":  "user",
+                         "content":  "Do the thing."
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Arrow symbol present: →, box: ─, accent: á",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "u8-000",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "grep",
+                                                                 "arguments":  "{\"pattern\":\"á\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "u8-000",
+                         "content":  "matched á → ℝ"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "CJK sample 测试 emoji ✓",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "u8-010",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"echo ✓\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "u8-010",
+                         "content":  "✓"
+                     }
+                 ],
+    "ledger":  [
+
+               ]
+}

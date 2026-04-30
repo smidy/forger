@@ -1,0 +1,36 @@
+{
+    "iter":  0,
+    "nudged":  false,
+    "messages":  [
+                     {
+                         "role":  "system",
+                         "content":  "You are a test agent."
+                     },
+                     {
+                         "role":  "user",
+                         "content":  "Do the thing."
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Arrow symbol present: →, box: ─, accent: á",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "u8-000",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "grep",
+                                                                 "arguments":  "{\"pattern\":\"á\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "u8-000",
+                         "content":  "matched á → ℝ"
+                     }
+                 ],
+    "ledger":  [
+
+               ]
+}

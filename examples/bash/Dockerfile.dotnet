@@ -1,0 +1,37 @@
+# dotnet-SDK variant of the Forge `bash` reference image.
+#
+# Eval-only — used by `.forge/agents/forge-dev-bash.agent.yaml` to give the
+# agent a sandboxed `dotnet build` / `dotnet test` capability. The stock
+# reference image (`./Dockerfile`, debian:bookworm-slim) lacks the SDK and
+# is the right choice for agents that only need shell utilities.
+#
+# Build from this repo root:
+#
+#   docker build -f examples/bash/Dockerfile.dotnet -t forge-bash-dotnet:local examples/bash
+#   docker image inspect forge-bash-dotnet:local --format '{{.Id}}'
+#   # then pin the digest in the agent YAML:
+#   #   bash:
+#   #     image: forge-bash-dotnet:local@sha256:<digest>
+#
+# Same Forge-enforced security posture as the reference image: `--network`,
+# `--cap-drop=ALL`, `--user 1000:1000`, `--read-only` rootfs, `--pids-limit`
+# etc are applied by Forge at `docker run` time, not here. Running this
+# image standalone produces no security guarantees — it is only secure when
+# Forge launches it.
+FROM mcr.microsoft.com/dotnet/sdk:9.0
+
+RUN apt-get update \
+ && apt-get install --no-install-recommends -y \
+      bash \
+      coreutils \
+      ca-certificates \
+      git \
+ && rm -rf /var/lib/apt/lists/*
+
+# Non-root principal matching the default `bash.user: 1000:1000` in Forge.
+RUN groupadd --gid 1000 forge \
+ && useradd  --uid 1000 --gid forge --create-home --shell /bin/bash forge
+
+WORKDIR /work
+USER forge:forge
+CMD ["sleep", "infinity"]

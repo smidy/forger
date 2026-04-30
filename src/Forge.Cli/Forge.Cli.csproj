@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackAsTool>true</PackAsTool>
+    <PackageId>Link.Forge.Cli</PackageId>
+    <ToolCommandName>forge</ToolCommandName>
+    <AssemblyName>Forge.Cli</AssemblyName>
+    <RootNamespace>Forge.Cli</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Forge.Core\Forge.Core.csproj" />
+    <ProjectReference Include="..\Forge.Tools\Forge.Tools.csproj" />
+    <ProjectReference Include="..\Forge.Llm\Forge.Llm.csproj" />
+    <ProjectReference Include="..\Forge.Agent\Forge.Agent.csproj" />
+    <ProjectReference Include="..\Forge.Pipeline\Forge.Pipeline.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" />
+    <PackageReference Include="Spectre.Console" />
+    <PackageReference Include="Spectre.Console.Cli" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\examples\**\*.yaml">
+      <LogicalName>Forge.Cli.Resources.examples.%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Forge.Cli.Tests" />
+  </ItemGroup>
+</Project>

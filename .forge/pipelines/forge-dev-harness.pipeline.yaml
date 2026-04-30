@@ -1,0 +1,17 @@
+# One-stage wrapper so `forge resume` works for forge-dev runs.
+# Direct `forge agent forge-dev` runs do not write `plan.json` and cannot be resumed.
+name: forge-dev-harness
+version: "1"
+
+stages:
+  - id: implement
+    agent: forge-dev
+    input:
+      task: "{{ input.task }}"
+
+outputs:
+  summary: $.stages.implement.output.summary
+  files_modified: $.stages.implement.output.files_modified
+  open_questions: $.stages.implement.output.open_questions
+  next_steps: $.stages.implement.output.next_steps
+  implementation_notes_path: $.stages.implement.output.implementation_notes_path

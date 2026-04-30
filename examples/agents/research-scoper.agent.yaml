@@ -1,0 +1,40 @@
+# Requires ~/.forge/llm.json with a capable model.
+# Pure reasoning agent — no tools. Produces 3-6 search queries for a topic.
+name: research-scoper
+description: Decomposes a research prompt into 3-6 targeted web search queries.
+model: replace-with-your-model-id
+max_iterations: 5
+tools: []
+
+input_schema:
+  type: object
+  properties:
+    prompt:
+      type: string
+      description: The research topic or question.
+  required: [prompt]
+
+output_schema:
+  type: object
+  properties:
+    queries:
+      type: array
+      items:
+        type: string
+      minItems: 3
+      maxItems: 6
+  required: [queries]
+
+system_prompt: |-
+  You are a research assistant. Given a research topic, produce 3 to 6 specific,
+  distinct web search queries that together will cover the topic thoroughly.
+  Vary the angle: background context, key events, primary sources, expert
+  perspectives, and counterarguments. Queries must be concise and directly usable
+  in a web search engine.
+
+  Call submit_final exactly once with the queries array. No plain-text-only replies.
+
+user_prompt: |-
+  Research topic: {{ input.prompt }}
+
+  Produce 3 to 6 search queries to investigate this topic.

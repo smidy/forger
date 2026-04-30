@@ -1,0 +1,29 @@
+# Requires ~/.forge/llm.json and a valid model id for your LiteLLM proxy.
+name: hello
+model: replace-with-your-model-id
+# Optional: request extended reasoning where the provider supports it. LiteLLM
+# forwards `effort` / `thinking_budget_tokens` to reasoning-capable providers
+# and silently drops unsupported params elsewhere.
+#
+# reasoning:
+#   effort: medium                  # low | medium | high
+#   thinking_budget_tokens: 2048    # Anthropic-only; must be >= 1024
+system_prompt: >-
+  Call submit_final exactly once with a short greeting. No plain-text-only replies.
+user_prompt: "Greet {{ input.name }} in one sentence."
+max_iterations: 6
+tools: []
+input_schema:
+  type: object
+  properties:
+    name:
+      type: string
+  required:
+    - name
+output_schema:
+  type: object
+  properties:
+    reply:
+      type: string
+  required:
+    - reply

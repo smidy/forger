@@ -1,0 +1,10 @@
+{"kind":"llm_call","timestamp":"2026-04-23T22:25:46.8811929+02:00","promptTokens":1200,"completionTokens":100,"durationMs":500}
+{"kind":"tool_call","iteration":0,"callId":"nr-0","toolName":"read_file","argsHash":"b5a2b6fc0639a611","durationMs":10,"error":null,"timestamp":"2026-04-23T22:25:46.8811929+02:00"}
+{"kind":"llm_call","timestamp":"2026-04-23T22:25:46.8868201+02:00","promptTokens":1430,"completionTokens":100,"durationMs":500}
+{"kind":"tool_call","iteration":1,"callId":"nr-1","toolName":"read_file","argsHash":"7138e3b5897c7a47","durationMs":10,"error":null,"timestamp":"2026-04-23T22:25:46.8868201+02:00"}
+{"kind":"llm_call","timestamp":"2026-04-23T22:25:46.8888326+02:00","promptTokens":1690,"completionTokens":100,"durationMs":500}
+{"kind":"tool_call","iteration":2,"callId":"nr-2","toolName":"read_file","argsHash":"11a90defa7da9539","durationMs":10,"error":null,"timestamp":"2026-04-23T22:25:46.8888326+02:00"}
+{"kind":"llm_call","timestamp":"2026-04-23T22:25:46.8928628+02:00","promptTokens":1980,"completionTokens":100,"durationMs":500}
+{"kind":"tool_call","iteration":3,"callId":"nr-3","toolName":"read_file","argsHash":"f49f90188adee260","durationMs":10,"error":null,"timestamp":"2026-04-23T22:25:46.8928628+02:00"}
+{"kind":"llm_call","timestamp":"2026-04-23T22:25:46.8981027+02:00","promptTokens":2300,"completionTokens":100,"durationMs":500}
+{"kind":"tool_call","iteration":4,"callId":"nr-4","toolName":"read_file","argsHash":"4a94070462db7780","durationMs":10,"error":null,"timestamp":"2026-04-23T22:25:46.8981027+02:00"}

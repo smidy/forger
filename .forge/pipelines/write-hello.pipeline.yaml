@@ -1,0 +1,12 @@
+# No LLM required: writes a file under the pipeline run workspace.
+name: write-hello
+version: "1"
+stages:
+  - id: file
+    tool: write_workspace_artifact
+    input:
+      path: "hello.txt"
+      content: "Hello from Forge examples."
+outputs:
+  path: $.stages.file.output.path
+  bytesWritten: $.stages.file.output.bytesWritten

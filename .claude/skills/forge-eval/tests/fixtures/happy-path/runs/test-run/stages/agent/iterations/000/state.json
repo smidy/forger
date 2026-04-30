@@ -1,0 +1,49 @@
+{
+    "iter":  0,
+    "nudged":  false,
+    "messages":  [
+                     {
+                         "role":  "system",
+                         "content":  "You are a test agent."
+                     },
+                     {
+                         "role":  "user",
+                         "content":  "Do the thing."
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Open the plan to understand the task.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "hp-000",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "read_file",
+                                                                 "arguments":  "{\"path\":\"docs/plans/x.md\"}"
+                                                             }
+                                            },
+                                            {
+                                                "id":  "hp-001",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "glob",
+                                                                 "arguments":  "{\"patterns\":[\"src/**/*.cs\"]}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "hp-000",
+                         "content":  "# Plan X"
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "hp-001",
+                         "content":  "[\"src/A.cs\",\"src/B.cs\"]"
+                     }
+                 ],
+    "ledger":  [
+
+               ]
+}

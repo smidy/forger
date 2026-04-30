@@ -1,0 +1,448 @@
+{
+  "generated_at": "2026-04-29T00:00:00+00:00",
+  "docs_dir": "C:/Repos/forge/docs",
+  "docs": [
+    {
+      "path": "adr/001-own-the-tool-loop.md",
+      "title": "001 Own the tool loop, no Semantic Kernel",
+      "layer": "adr",
+      "updated": "2026-04-21",
+      "code_refs": [
+        "src/Forge.Agent/AgentRunner.cs",
+        "src/Forge.Llm/LiteLlmClient.cs"
+      ],
+      "related": [
+        "Application/AgentRunner.md",
+        "Infrastructure/llm-client.md"
+      ]
+    },
+    {
+      "path": "adr/002-json-at-every-boundary.md",
+      "title": "002 JSON at every boundary",
+      "layer": "adr",
+      "updated": "2026-04-21",
+      "code_refs": [
+        "src/Forge.Core/Json/",
+        "src/Forge.Pipeline/PipelineExecutor.cs",
+        "src/Forge.Cli/Program.cs"
+      ],
+      "related": [
+        "Infrastructure/logging.md",
+        "Data/workspace.md"
+      ]
+    },
+    {
+      "path": "adr/003-litellm-single-endpoint.md",
+      "title": "003 Single LiteLLM endpoint",
+      "layer": "adr",
+      "updated": "2026-04-21",
+      "code_refs": [
+        "src/Forge.Llm/LiteLlmClient.cs",
+        "src/Forge.Llm/LiteLlmConfig.cs"
+      ],
+      "related": [
+        "Infrastructure/llm-client.md",
+        "adr/001-own-the-tool-loop.md"
+      ]
+    },
+    {
+      "path": "adr/005-trace-event-schema.md",
+      "title": "005 Trace event schema — event-per-fact, rename rather than gate",
+      "layer": "adr",
+      "updated": "2026-04-29",
+      "code_refs": [
+        "src/Forge.Core/Trace/TraceEvent.cs",
+        "src/Forge.Core/Trace/TraceSink.cs",
+        "src/Forge.Agent/AgentRunner.cs",
+        "src/Forge.Core/Workspace/WorkspaceIo.cs"
+      ],
+      "related": [
+        "Infrastructure/logging.md",
+        "Data/workspace.md"
+      ]
+    },
+    {
+      "path": "Application/AgentRunner.md",
+      "title": "AgentRunner tool loop",
+      "layer": "Application",
+      "updated": "2026-04-29",
+      "code_refs": [
+        "src/Forge.Agent/AgentRunner.cs",
+        "src/Forge.Agent/ToolResultCapper.cs"
+      ],
+      "related": [
+        "Domain/agents.md",
+        "Domain/tools.md",
+        "Infrastructure/project-context.md"
+      ]
+    },
+    {
+      "path": "Data/workspace.md",
+      "title": "Run workspace layout",
+      "layer": "Data",
+      "updated": "2026-04-29",
+      "code_refs": [
+        "src/Forge.Core/Workspace/WorkspacePaths.cs",
+        "src/Forge.Core/Workspace/WorkspaceIo.cs",
+        "src/Forge.Cli/Commands/AgentCommand.cs",
+        "src/Forge.Agent/AgentRunner.cs"
+      ],
+      "related": [
+        "Domain/runs.md",
+        "Infrastructure/logging.md"
+      ]
+    },
+    {
+      "path": "Domain/agents.md",
+      "title": "Agents",
+      "layer": "Domain",
+      "updated": "2026-04-29",
+      "code_refs": [
+        "src/Forge.Agent/",
+        "src/Forge.Agent/AgentConfig.cs",
+        "src/Forge.Agent/YamlFront.cs"
+      ],
+      "related": [
+        "Application/AgentRunner.md",
+        "Domain/tools.md",
+        "Infrastructure/project-context.md"
+      ]
+    },
+    {
+      "path": "Domain/runs.md",
+      "title": "Runs",
+      "layer": "Domain",
+      "updated": "2026-04-29",
+      "code_refs": [
+        "src/Forge.Core/Types/RunState.cs",
+        "src/Forge.Core/Types/RuntimeContext.cs",
+        "src/Forge.Core/Workspace/RunIdGenerator.cs",
+        "src/Forge.Core/Workspace/WorkspacePaths.cs"
+      ],
+      "related": [
+        "Data/workspace.md",
+        "Application/AgentRunner.md"
+      ]
+    },
+    {
+      "path": "Domain/tools.md",
+      "title": "Tools",
+      "layer": "Domain",
+      "updated": "2026-04-29",
+      "code_refs": [
+        "src/Forge.Tools/",
+        "src/Forge.Tools/ITool.cs",
+        "src/Forge.Tools/ToolBase.cs",
+        "src/Forge.Tools/ToolRegistry.cs",
+        "src/Forge.Tools/BuiltInToolsRegistration.cs",
+        "src/Forge.Tools/BashTool.cs",
+        "src/Forge.Tools/Docker/MountComposer.cs",
+        "src/Forge.Core/Config/BashConfig.cs"
+      ],
+      "related": [
+        "Application/AgentRunner.md",
+        "Domain/agents.md"
+      ]
+    },
+    {
+      "path": "Infrastructure/llm-client.md",
+      "title": "LLM client",
+      "layer": "Infrastructure",
+      "updated": "2026-04-21",
+      "code_refs": [
+        "src/Forge.Llm/LiteLlmClient.cs",
+        "src/Forge.Llm/LiteLlmConfig.cs",
+        "src/Forge.Llm/ServiceCollectionExtensions.cs",
+        "src/Forge.Core/Llm/CompletionModels.cs"
+      ],
+      "related": [
+        "adr/003-litellm-single-endpoint.md",
+        "Application/AgentRunner.md"
+      ]
+    },
+    {
+      "path": "Infrastructure/logging.md",
+      "title": "Logging and tracing",
+      "layer": "Infrastructure",
+      "updated": "2026-04-29",
+      "code_refs": [
+        "src/Forge.Core/Trace/",
+        "src/Forge.Cli/Program.cs",
+        "src/Forge.Core/Trace/TraceSink.cs",
+        "src/Forge.Core/Trace/TraceEvent.cs",
+        "src/Forge.Core/Trace/ITraceSink.cs"
+      ],
+      "related": [
+        "adr/002-json-at-every-boundary.md",
+        "Data/workspace.md"
+      ]
+    },
+    {
+      "path": "Infrastructure/plugins.md",
+      "title": "Plugin and skill discovery",
+      "layer": "Infrastructure",
+      "updated": "2026-04-29",
+      "code_refs": [
+        "src/Forge.Pipeline/PluginPaths.cs",
+        "src/Forge.Agent/SkillScanner.cs",
+        "src/Forge.Agent/SkillCatalog.cs",
+        "src/Forge.Core/Filesystem/SkillDirectoryPaths.cs"
+      ],
+      "related": [
+        "Infrastructure/project-context.md",
+        "Domain/agents.md"
+      ]
+    },
+    {
+      "path": "Infrastructure/project-context.md",
+      "title": "Project context injection",
+      "layer": "Infrastructure",
+      "updated": "2026-04-29",
+      "code_refs": [
+        "src/Forge.Core/Filesystem/ProjectMarkdownLoader.cs",
+        "src/Forge.Core/Filesystem/ProjectContextPaths.cs",
+        "src/Forge.Core/Filesystem/SkillDirectoryPaths.cs"
+      ],
+      "related": [
+        "Infrastructure/plugins.md",
+        "Domain/agents.md",
+        "Application/AgentRunner.md"
+      ]
+    },
+    {
+      "path": "Presentation/cli.md",
+      "title": "CLI reference",
+      "layer": "Presentation",
+      "updated": "2026-04-29",
+      "code_refs": [
+        "src/Forge.Cli/",
+        "src/Forge.Cli/Program.cs",
+        "src/Forge.Cli/Commands/AgentCommand.cs",
+        "src/Forge.Cli/Commands/ListCommand.cs",
+        "src/Forge.Cli/Commands/DescribeCommand.cs",
+        "src/Forge.Cli/Commands/ValidateCommand.cs",
+        "src/Forge.Cli/Commands/ResumeCommand.cs",
+        "src/Forge.Cli/Commands/RunsSubcommands.cs"
+      ],
+      "related": [
+        "Domain/agents.md",
+        "Domain/tools.md",
+        "Infrastructure/llm-client.md"
+      ]
+    },
+    {
+      "path": "csharp-conventions.md",
+      "title": "C# conventions",
+      "layer": "(root)",
+      "updated": "2026-04-23",
+      "code_refs": [],
+      "related": []
+    },
+    {
+      "path": "recipes/add-built-in-tool.md",
+      "title": "Add a built-in tool",
+      "layer": "recipes",
+      "updated": "2026-04-29",
+      "code_refs": [
+        "src/Forge.Tools/",
+        "src/Forge.Tools/BuiltInToolsRegistration.cs"
+      ],
+      "related": [
+        "Domain/tools.md",
+        "Application/AgentRunner.md"
+      ]
+    },
+    {
+      "path": "recipes/add-cli-command.md",
+      "title": "Add a CLI command",
+      "layer": "recipes",
+      "updated": "2026-04-21",
+      "code_refs": [
+        "src/Forge.Cli/Commands/",
+        "src/Forge.Cli/Program.cs"
+      ],
+      "related": [
+        "Presentation/cli.md",
+        "Infrastructure/logging.md"
+      ]
+    },
+    {
+      "path": "recipes/add-trace-event.md",
+      "title": "Add a trace event type",
+      "layer": "recipes",
+      "updated": "2026-04-21",
+      "code_refs": [
+        "src/Forge.Core/Trace/TraceEvent.cs"
+      ],
+      "related": [
+        "Infrastructure/logging.md",
+        "Data/workspace.md"
+      ]
+    },
+    {
+      "path": "recipes/fix-agent-loop-bug.md",
+      "title": "Fix an agent-loop bug",
+      "layer": "recipes",
+      "updated": "2026-04-29",
+      "code_refs": [
+        "src/Forge.Agent/AgentRunner.cs",
+        "src/Forge.Agent/ToolResultCapper.cs"
+      ],
+      "related": [
+        "Application/AgentRunner.md",
+        "Domain/agents.md"
+      ]
+    }
+  ],
+  "by_code_ref": {
+    "src/Forge.Agent/AgentRunner.cs": [
+      "adr/001-own-the-tool-loop.md",
+      "adr/005-trace-event-schema.md",
+      "Application/AgentRunner.md",
+      "Data/workspace.md",
+      "recipes/fix-agent-loop-bug.md"
+    ],
+    "src/Forge.Agent/ToolResultCapper.cs": [
+      "Application/AgentRunner.md",
+      "recipes/fix-agent-loop-bug.md"
+    ],
+    "src/Forge.Agent/": [
+      "Domain/agents.md"
+    ],
+    "src/Forge.Agent/AgentConfig.cs": [
+      "Domain/agents.md"
+    ],
+    "src/Forge.Agent/YamlFront.cs": [
+      "Domain/agents.md"
+    ],
+    "src/Forge.Agent/SkillScanner.cs": [
+      "Infrastructure/plugins.md"
+    ],
+    "src/Forge.Agent/SkillCatalog.cs": [
+      "Infrastructure/plugins.md"
+    ],
+    "src/Forge.Llm/LiteLlmClient.cs": [
+      "adr/001-own-the-tool-loop.md",
+      "adr/003-litellm-single-endpoint.md",
+      "Infrastructure/llm-client.md"
+    ],
+    "src/Forge.Llm/LiteLlmConfig.cs": [
+      "adr/003-litellm-single-endpoint.md",
+      "Infrastructure/llm-client.md"
+    ],
+    "src/Forge.Llm/ServiceCollectionExtensions.cs": [
+      "Infrastructure/llm-client.md"
+    ],
+    "src/Forge.Core/Json/": [
+      "adr/002-json-at-every-boundary.md"
+    ],
+    "src/Forge.Core/Trace/": [
+      "Infrastructure/logging.md"
+    ],
+    "src/Forge.Core/Trace/TraceEvent.cs": [
+      "adr/005-trace-event-schema.md",
+      "Infrastructure/logging.md",
+      "recipes/add-trace-event.md"
+    ],
+    "src/Forge.Core/Trace/TraceSink.cs": [
+      "adr/005-trace-event-schema.md",
+      "Infrastructure/logging.md"
+    ],
+    "src/Forge.Core/Trace/ITraceSink.cs": [
+      "Infrastructure/logging.md"
+    ],
+    "src/Forge.Core/Workspace/WorkspacePaths.cs": [
+      "Data/workspace.md",
+      "Domain/runs.md"
+    ],
+    "src/Forge.Core/Workspace/WorkspaceIo.cs": [
+      "adr/005-trace-event-schema.md",
+      "Data/workspace.md"
+    ],
+    "src/Forge.Core/Workspace/RunIdGenerator.cs": [
+      "Domain/runs.md"
+    ],
+    "src/Forge.Core/Types/RunState.cs": [
+      "Domain/runs.md"
+    ],
+    "src/Forge.Core/Types/RuntimeContext.cs": [
+      "Domain/runs.md"
+    ],
+    "src/Forge.Core/Llm/CompletionModels.cs": [
+      "Infrastructure/llm-client.md"
+    ],
+    "src/Forge.Core/Filesystem/ProjectMarkdownLoader.cs": [
+      "Infrastructure/project-context.md"
+    ],
+    "src/Forge.Core/Filesystem/ProjectContextPaths.cs": [
+      "Infrastructure/project-context.md"
+    ],
+    "src/Forge.Core/Filesystem/SkillDirectoryPaths.cs": [
+      "Infrastructure/plugins.md",
+      "Infrastructure/project-context.md"
+    ],
+    "src/Forge.Core/Config/BashConfig.cs": [
+      "Domain/tools.md"
+    ],
+    "src/Forge.Tools/": [
+      "Domain/tools.md",
+      "recipes/add-built-in-tool.md"
+    ],
+    "src/Forge.Tools/ITool.cs": [
+      "Domain/tools.md"
+    ],
+    "src/Forge.Tools/ToolBase.cs": [
+      "Domain/tools.md"
+    ],
+    "src/Forge.Tools/ToolRegistry.cs": [
+      "Domain/tools.md"
+    ],
+    "src/Forge.Tools/BuiltInToolsRegistration.cs": [
+      "Domain/tools.md",
+      "recipes/add-built-in-tool.md"
+    ],
+    "src/Forge.Tools/BashTool.cs": [
+      "Domain/tools.md"
+    ],
+    "src/Forge.Tools/Docker/MountComposer.cs": [
+      "Domain/tools.md"
+    ],
+    "src/Forge.Pipeline/PluginPaths.cs": [
+      "Infrastructure/plugins.md"
+    ],
+    "src/Forge.Pipeline/PipelineExecutor.cs": [
+      "adr/002-json-at-every-boundary.md"
+    ],
+    "src/Forge.Cli/": [
+      "Presentation/cli.md"
+    ],
+    "src/Forge.Cli/Program.cs": [
+      "adr/002-json-at-every-boundary.md",
+      "Infrastructure/logging.md",
+      "Presentation/cli.md",
+      "recipes/add-cli-command.md"
+    ],
+    "src/Forge.Cli/Commands/": [
+      "recipes/add-cli-command.md"
+    ],
+    "src/Forge.Cli/Commands/AgentCommand.cs": [
+      "Data/workspace.md",
+      "Presentation/cli.md"
+    ],
+    "src/Forge.Cli/Commands/ListCommand.cs": [
+      "Presentation/cli.md"
+    ],
+    "src/Forge.Cli/Commands/DescribeCommand.cs": [
+      "Presentation/cli.md"
+    ],
+    "src/Forge.Cli/Commands/ValidateCommand.cs": [
+      "Presentation/cli.md"
+    ],
+    "src/Forge.Cli/Commands/ResumeCommand.cs": [
+      "Presentation/cli.md"
+    ],
+    "src/Forge.Cli/Commands/RunsSubcommands.cs": [
+      "Presentation/cli.md"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+name: interviewer-demo
+model: gpt-4o-mini
+max_iterations: 10
+input_schema:
+  type: object
+output_schema:
+  type: object
+  required: [name, goal, risks]
+  properties:
+    name: { type: string }
+    goal: { type: string }
+    risks:
+      type: array
+      items: { type: string }
+tools:
+  - ask_caller
+caller_io:
+  max_prompts: 5
+system_prompt: |
+  You are an interviewer. Ask the caller for their name, their goal, and
+  three risks they see. Call ask_caller for each question. Then call
+  submit_final with the collected answers.

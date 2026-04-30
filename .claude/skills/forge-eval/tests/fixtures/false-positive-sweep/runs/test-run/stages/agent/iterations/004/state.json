@@ -1,0 +1,112 @@
+{
+    "iter":  4,
+    "nudged":  false,
+    "messages":  [
+                     {
+                         "role":  "system",
+                         "content":  "You are a test agent."
+                     },
+                     {
+                         "role":  "user",
+                         "content":  "Do the thing."
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 0.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-0",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file0.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-0",
+                         "content":  "unique content for file 0 with specific data abc0 def0 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 1.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-1",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file1.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-1",
+                         "content":  "unique content for file 1 with specific data abc1 def1 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 2.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-2",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file2.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-2",
+                         "content":  "unique content for file 2 with specific data abc2 def2 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 3.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-3",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file3.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-3",
+                         "content":  "unique content for file 3 with specific data abc3 def3 ghi"
+                     },
+                     {
+                         "role":  "assistant",
+                         "reasoning_content":  "Inspecting file 4.",
+                         "tool_calls":  [
+                                            {
+                                                "id":  "sw-4",
+                                                "type":  "function",
+                                                "function":  {
+                                                                 "name":  "bash",
+                                                                 "arguments":  "{\"command\":\"cat file4.txt\"}"
+                                                             }
+                                            }
+                                        ]
+                     },
+                     {
+                         "role":  "tool",
+                         "tool_call_id":  "sw-4",
+                         "content":  "unique content for file 4 with specific data abc4 def4 ghi"
+                     }
+                 ],
+    "ledger":  [
+
+               ]
+}

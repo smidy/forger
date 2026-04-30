@@ -1,0 +1,4 @@
+{"kind":"llm_call","timestamp":"2026-04-23T22:25:46.9174541+02:00","promptTokens":1200,"completionTokens":100,"durationMs":500}
+{"kind":"tool_call","iteration":0,"callId":"u8-000","toolName":"grep","argsHash":"4dd5d0421a303ab2","durationMs":10,"error":null,"timestamp":"2026-04-23T22:25:46.9174541+02:00"}
+{"kind":"llm_call","timestamp":"2026-04-23T22:25:46.9236723+02:00","promptTokens":1430,"completionTokens":100,"durationMs":500}
+{"kind":"tool_call","iteration":1,"callId":"u8-010","toolName":"bash","argsHash":"c891126c7886ab87","durationMs":10,"error":null,"timestamp":"2026-04-23T22:25:46.9236723+02:00"}

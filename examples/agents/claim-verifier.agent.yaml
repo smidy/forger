@@ -1,0 +1,61 @@
+# Requires ~/.forge/llm.json with a capable model AND a configured search provider.
+name: claim-verifier
+description: Cross-checks key claims from a research finding using independent sources.
+model: replace-with-your-model-id
+max_iterations: 8
+
+tools:
+  - web_search
+  - fetch_url
+
+input_schema:
+  type: object
+  properties:
+    query:
+      type: string
+    findings:
+      type: string
+    sources:
+      type: array
+      items:
+        type: string
+  required: [query, findings, sources]
+
+output_schema:
+  type: object
+  properties:
+    query:
+      type: string
+    findings:
+      type: string
+    sources:
+      type: array
+      items:
+        type: string
+    verified:
+      type: boolean
+    notes:
+      type: string
+      description: What was confirmed, contradicted, or unclear.
+  required: [query, findings, sources, verified, notes]
+
+system_prompt: |-
+  You are a fact-checker. Given a research finding and its sources:
+  1. Identify the 2-3 most important specific claims in the findings.
+  2. Search for independent corroboration or contradiction of each claim.
+  3. Set verified=true if the core claims hold up; false if any are contradicted
+     or unsupported after a reasonable effort.
+  4. Write a brief notes field explaining what you found.
+
+  Do not rewrite the findings — only add verification context in notes. Echo the
+  original query, findings, and sources through unchanged in your output.
+
+  Call submit_final exactly once with the structured result.
+
+user_prompt: |-
+  Query: {{ input.query }}
+
+  Findings:
+  {{ input.findings }}
+
+  Original sources: {{ input.sources | array.join ", " }}

@@ -1,0 +1,176 @@
+name: forge-dev
+model: deepseek-v4-pro
+max_iterations: 150
+
+# Request extended reasoning where the model / provider supports it. LiteLLM
+# forwards `reasoning_effort` to reasoning-capable providers and silently drops
+# it elsewhere, so this remains a no-op for non-reasoning backends.
+reasoning:
+  effort: high
+
+tools:
+  - llm_complete
+  - bash
+
+bash:
+  # Locally-built image; pinned by image-ID (sha256 of image config). The
+  # `<tag>@sha256:<id>` form is NOT valid Docker syntax for local images
+  # because they have no RepoDigest — bare `sha256:<id>` is the canonical form.
+  # Tag for humans: forge-bash-dotnet:local
+  image: sha256:f1e08b856e02e7e228aeb5ce52378df84ba2e79dc1f7ea60fb440875700437b7
+  network: bridge
+  timeout_sec: 180
+  memory: 2g
+  cpus: 2.0
+  pids_limit: 512
+  # Mount the repo at /repo. Host path is hardcoded — this YAML is
+  # project-local and pinned to this checkout; bash.mounts does not support
+  # token expansion. The run workspace is mounted at /run automatically.
+  mounts:
+    - host: C:/Repos/forge
+      container: /repo
+      mode: rw
+  env_allow: [DOTNET_CLI_HOME, DOTNET_CLI_TELEMETRY_OPTOUT, NUGET_PACKAGES, LANG]
+  env:
+    DOTNET_CLI_HOME: /tmp/dotnet
+    DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+    LANG: C.UTF-8
+  diff:
+    max_files: 50000
+    max_depth: 20
+
+# Pull the authoritative project invariants from CLAUDE.md / AGENTS.md at runtime
+# via ProjectMarkdownLoader. Keeps this YAML from drifting against the real rules.
+inject_project_context: true
+inject_skills_catalog: false
+
+# Disable post-loop diff verification for this agent. The bash tool's write
+# ledger captures every MSBuild / package-manager artefact written inside the
+# repo (obj/*.assets.cache, bin/**/*.dll, etc.) — thousands of entries per
+# `dotnet build`. `submit_final`'s reconciliation then rejects the submission
+# because the agent didn't declare those transient outputs in `files_modified`.
+# Until the ledger grows a per-tool filter, flip this off so a successful build
+# can complete the run.
+diff_verification:
+  enabled: false
+
+system_prompt: |
+  You are a senior .NET 9 engineer implementing features on the **Forge** CLI project.
+
+  The project's authoritative conventions, architecture, and invariants are loaded
+  for you from `CLAUDE.md` at the repo root — read and follow them. Do not restate
+  them here; read the live source.
+
+  ## Workflow
+
+  All filesystem interaction goes through `bash`. The repo is mounted rw at
+  `/repo`; the run workspace is mounted rw at `/run`. There are no structured
+  filesystem tools — every read, search, and edit is a shell command inside
+  the container.
+
+  1. Start by reading `CLAUDE.md` and `docs/index.md` so you work from current
+     conventions. Use `bash` (`cat`, `grep -r`, `find`, `ls`) to explore before
+     editing.
+  2. Implement changes by editing files inside `/repo` directly with bash —
+     `cat > path` / heredocs / `sed -i` / any editor available in the image.
+  3. Write the run-workspace deliverable `implementation_notes.md` to `/run`
+     via bash (e.g. `cat > /run/implementation_notes.md <<'EOF' ... EOF`).
+  4. Call `submit_final` exactly once.
+
+  ## Tool preference
+
+  Bash is the only tool for filesystem reads, writes, and build/test.
+  `diff_verification` is disabled — bash writes will not be reconciled against
+  `files_modified` at `submit_final`, but you MUST still report every edited
+  path accurately in the `files_modified` output array.
+
+  ## Sandboxed bash (build/test)
+
+  The repo is mounted rw at `/repo`. The run workspace is mounted rw at `/run`.
+  Scratch dirs are pre-configured (HOME, TMPDIR, NUGET_PACKAGES) so package
+  caches have host-backed space.
+
+  For .NET builds, the host's `obj/` and `bin/` (built on Windows) are visible
+  through the `/repo` bind mount and will poison a Linux container build with
+  CS0579 duplicate-attribute errors. Always run `dotnet clean` before
+  `dotnet build` on the first call:
+
+      cd /repo && dotnet clean Forge.sln && dotnet build Forge.sln
+
+  Do NOT call `submit_final` with a broken build.
+
+  ## What you must never do
+
+  - Never propose-only output — implement directly via bash.
+  - Never invent API calls you haven't verified by reading the source.
+  - Never touch files you haven't first read.
+  - Never re-read a file already in context unless you expect it to have changed. Each redundant read costs a full round trip.
+  - Never produce freeform text outside the final `submit_final` call.
+
+user_prompt: |
+  Task: {{ input.task }}
+
+  {%- if input.context %}
+
+  Background / constraints:
+  {{ input.context }}
+  {%- endif %}
+
+  Today's date (UTC) is {{ forge.today }}. Use this exact value for any
+  status-line date you write; do not guess, invent, or rely on your training
+  cut-off.
+
+  Explore the codebase with `bash` (`cat`, `grep -r`, `find`) as needed, implement the
+  change by editing files directly via `bash` inside `/repo`, verify with `bash`
+  (`dotnet build` / `dotnet test`), write `implementation_notes.md` to `/run` via bash,
+  then call submit_final.
+
+  Acceptance coverage (mandatory). For every acceptance criterion the task
+  spells out, either (a) implement it and cover it with at least one test, or
+  (b) record it in `open_questions` with a one-line reason. Do not call
+  `submit_final` with uncovered acceptance items left unexplained.
+
+input_schema:
+  type: object
+  additionalProperties: false
+  properties:
+    task:
+      type: string
+      description: One-paragraph description of the feature or fix to implement.
+    context:
+      type: string
+      description: Optional design notes, constraints, or acceptance criteria.
+  required:
+    - task
+
+output_schema:
+  type: object
+  additionalProperties: false
+  properties:
+    summary:
+      type: string
+      description: One-paragraph summary of what was implemented.
+    files_modified:
+      type: array
+      description: Repo-relative paths of every file touched (added, modified, or deleted).
+      items:
+        type: string
+    open_questions:
+      type: array
+      description: Unresolved ambiguities or follow-up items.
+      items:
+        type: string
+    next_steps:
+      type: array
+      description: Concrete follow-up actions for the developer (e.g. run tests, review diff).
+      items:
+        type: string
+    implementation_notes_path:
+      type: string
+      description: Path within the run workspace where implementation_notes.md was written.
+  required:
+    - summary
+    - files_modified
+    - open_questions
+    - next_steps
+    - implementation_notes_path

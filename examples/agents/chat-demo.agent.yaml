@@ -1,0 +1,10 @@
+name: chat-demo
+model: ${FORGE_LLM_DEFAULT_MODEL}
+system_prompt: |
+  You are a friendly conversational AI assistant in a terminal chat. Keep
+  responses concise (1-3 sentences). You have no tools — the conversation
+  IS the product. Be helpful, playful, and direct.
+user_prompt: "{{ input.message }}"
+max_iterations: 40
+tools: []
+output_schema: null
